@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Triage | Ecosystem Scouting (internal)</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/site.css">
+<link rel="stylesheet" href="../assets/css/form.css">
+<style>
+  /* Internal tool. Nothing is uploaded anywhere: files are parsed in the browser only. */
+  .tool { max-width: 1320px; padding-top: 40px; padding-bottom: 80px; }
+  .tool__head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px; margin-bottom: 24px; }
+  .tool__head h1 { font-size: clamp(28px, 3.6vw, 40px); }
+  .tool__head p { margin: 8px 0 0; color: var(--muted); max-width: 640px; font-size: 15px; }
+  .drop { border: 1px dashed rgba(197,139,255,.5); border-radius: 20px; padding: 28px; text-align: center; color: var(--muted); background: var(--glass); cursor: pointer; }
+  .drop.is-over { background: rgba(133,18,207,.18); border-style: solid; }
+  .drop input { display: none; }
+  .drop strong { color: var(--ink); }
+  .bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 22px 0 14px; }
+  .bar .input { width: auto; min-width: 150px; padding: 10px 14px; font-size: 14px; }
+  .bar .input[type="search"] { min-width: 220px; }
+  .bar .count { margin-left: auto; font-size: 13px; color: var(--dim); }
+  .tbl-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 18px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { padding: 11px 12px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; white-space: nowrap; }
+  th { position: sticky; top: 0; background: #140C24; color: var(--dim); font-weight: 500; font-size: 12px; letter-spacing: .04em; cursor: pointer; user-select: none; }
+  th.sorted { color: var(--accent); }
+  tbody tr { cursor: pointer; }
+  tbody tr:hover { background: rgba(255,255,255,.04); }
+  tbody tr.is-selected { background: rgba(133,18,207,.18); }
+  td.company { font-weight: 500; white-space: normal; min-width: 160px; }
+  td.company small { display: block; color: var(--dim); font-weight: 400; }
+  .score { display: inline-block; min-width: 42px; text-align: center; padding: 3px 8px; border-radius: 999px; font-weight: 600; font-size: 13px; }
+  .score--hi { background: rgba(104, 220, 150, .18); color: #9BF0BE; }
+  .score--mid { background: rgba(197,139,255,.2); color: var(--lav); }
+  .score--lo { background: rgba(255,255,255,.08); color: var(--muted); }
+  .tag { display: inline-block; padding: 2px 9px; border-radius: 999px; border: 1px solid var(--line-strong); font-size: 12px; color: var(--muted); }
+  .tag--core { border-color: rgba(197,139,255,.6); color: var(--accent); }
+  .tag--adjacent { border-color: rgba(255,214,120,.5); color: #FFD678; }
+  .tag--out { border-color: rgba(255,140,170,.5); color: #FFB3C7; }
+  .star { position: static; opacity: 1; animation: none; width: auto; height: auto; border-radius: 0; color: var(--accent); }
+  .layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .layout.has-detail { grid-template-columns: minmax(0, 1.4fr) minmax(360px, 1fr); }
+  @media (max-width: 1000px) { .layout.has-detail { grid-template-columns: 1fr; } }
+  .detail { position: sticky; top: 20px; align-self: start; max-height: calc(100vh - 40px); overflow: auto; }
+  .detail h2 { font-family: var(--font-display); font-weight: 500; font-size: 26px; letter-spacing: -.01em; }
+  .detail .kv { display: grid; grid-template-columns: 150px 1fr; gap: 6px 12px; font-size: 14px; margin-top: 10px; }
+  .detail .kv dt { color: var(--dim); } .detail .kv dd { margin: 0; overflow-wrap: anywhere; }
+  .detail h3 { margin: 22px 0 6px; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--dim); font-weight: 500; }
+  .detail .close { float: right; }
+  .empty { padding: 48px; text-align: center; color: var(--dim); }
+  .pill.small { min-height: 38px; padding: 0 18px; font-size: 14px; }
+  .reasons li { color: var(--muted); font-size: 14px; }
+  .reasons { margin: 4px 0 0; padding-left: 18px; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="wrap">
+    <nav class="nav" aria-label="Main">
+      <a class="brand" href="../"><span class="brand__mark" aria-hidden="true">&gt;</span><span>Accenture</span><span class="brand__sep" aria-hidden="true"></span><span class="brand__practice">Advanced Data Architecture</span></a>
+      <div class="nav__links"><span class="tag">Internal tool</span></div>
+    </nav>
+  </div>
+
+  <main class="wrap tool">
+    <div class="tool__head">
+      <div>
+        <h1 class="display">Submission triage</h1>
+        <p>Drop the export of your form provider (CSV) or the JSON files vendors downloaded. Everything is processed in your browser; nothing leaves this page. Scores are recomputed with the current rules in classifier.js.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="pill pill-ghost small" id="load-sample" type="button">Load sample data</button>
+        <button class="pill pill-ghost small" id="export" type="button" disabled>Export filtered CSV</button>
+      </div>
+    </div>
+
+    <label class="drop" id="drop">
+      <input type="file" id="file" multiple accept=".csv,.json,.jsonl,.txt">
+      <strong>Drop files here</strong> or click to choose. Accepts CSV exports and JSON (single record, array, or one record per line).
+    </label>
+
+    <div class="bar">
+      <input class="input" type="search" id="q" placeholder="Search company, product, contact">
+      <select class="input" id="f-scope"><option value="">All scopes</option><option value="core">Core</option><option value="adjacent">Adjacent</option><option value="out">Out of scope</option></select>
+      <select class="input" id="f-action"><option value="">All actions</option><option value="fast_track">Fast-track</option><option value="review_priority">Review with priority</option><option value="review">Review</option><option value="park">Park</option><option value="decline">Decline</option></select>
+      <select class="input" id="f-area"><option value="">All areas</option></select>
+      <span class="count" id="count">No submissions loaded</span>
+    </div>
+
+    <div class="layout" id="layout">
+      <div class="tbl-wrap">
+        <table id="tbl">
+          <thead><tr>
+            <th data-sort="date">Date</th><th data-sort="company">Company</th><th data-sort="area">Primary area</th><th data-sort="scope">Scope</th>
+            <th data-sort="fit" class="sorted">Fit</th><th data-sort="maturity">Maturity</th><th data-sort="readiness">Readiness</th><th data-sort="action">Suggested action</th><th data-sort="country">HQ</th><th data-sort="contact">Contact</th>
+          </tr></thead>
+          <tbody id="rows"><tr><td colspan="10" class="empty">Load an export to start.</td></tr></tbody>
+        </table>
+      </div>
+      <aside class="card detail" id="detail" hidden></aside>
+    </div>
+  </main>
+</div>
+
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/form-schema.js"></script>
+<script src="../assets/js/classifier.js"></script>
+<script>
+(function () {
+  var SCHEMA = window.SCOUTING_SCHEMA, CLS = window.SCOUTING_CLASSIFIER;
+  var QUESTIONS = {}; SCHEMA.steps.forEach(function (s) { s.questions.forEach(function (q) { QUESTIONS[q.id] = q; }); });
+  var records = [], sortKey = 'fit', sortDir = -1, selected = null;
+
+  /* ---------- parsing ---------- */
+  function parseCSV(text) {
+    var rows = [], row = [], field = '', i = 0, inQ = false;
+    while (i < text.length) {
+      var c = text[i];
+      if (inQ) {
+        if (c === '"') { if (text[i + 1] === '"') { field += '"'; i++; } else inQ = false; }
+        else field += c;
+      } else if (c === '"') inQ = true;
+      else if (c === ',') { row.push(field); field = ''; }
+      else if (c === '\n' || c === '\r') { if (c === '\r' && text[i + 1] === '\n') i++; row.push(field); rows.push(row); row = []; field = ''; }
+      else field += c;
+      i++;
+    }
+    if (field.length || row.length) { row.push(field); rows.push(row); }
+    rows = rows.filter(function (r) { return r.some(function (x) { return x.trim() !== ''; }); });
+    if (!rows.length) return [];
+    var head = rows[0].map(function (h) { return h.trim(); });
+    return rows.slice(1).map(function (r) { var o = {}; head.forEach(function (h, k) { o[h] = r[k] !== undefined ? r[k] : ''; }); return o; });
+  }
+  function toRecord(obj) {
+    // 1) a full record (downloaded JSON or custom endpoint)
+    if (obj && obj.answers && obj.meta) return finish(obj);
+    if (obj && obj.record && obj.record.answers) return finish(obj.record);
+    // 2) a flat row with payload_json (Web3Forms / Formspree export)
+    var pj = obj && (obj.payload_json || obj['Payload Json'] || obj['payload json']);
+    if (pj) { try { var r = JSON.parse(pj); if (r.answers) return finish(r); } catch (e) { /* fall through */ } }
+    // 3) a flat row with labelled values only: keep as best effort
+    var rec = { answers: {}, labelled: {}, meta: { reference_id: obj.reference_id || '', submitted_at: obj.submitted_at || obj.date || obj.Date || '' } };
+    Object.keys(obj).forEach(function (k) { if (QUESTIONS[k]) rec.labelled[k] = obj[k]; });
+    rec.answers = unlabel(rec.labelled);
+    return finish(rec);
+  }
+  function unlabel(labelled) {
+    var a = {};
+    Object.keys(labelled).forEach(function (id) {
+      var q = QUESTIONS[id], v = labelled[id]; if (!q || v === '') return;
+      if (q.type === 'checkbox' || q.type === 'radio' || q.type === 'select') {
+        var opts = q.options || (q.optionsFrom ? SCHEMA.meta.domains : []);
+        var parts = q.type === 'checkbox' ? String(v).split(/;\s*/) : [String(v)];
+        var vals = parts.map(function (p) { var o = opts.filter(function (o) { return o.label === p || o.value === p; })[0]; return o ? o.value : p; });
+        a[id] = q.type === 'checkbox' ? vals : vals[0];
+      } else if (q.type === 'consent') a[id] = /yes|true/i.test(v);
+      else a[id] = v;
+    });
+    return a;
+  }
+  function finish(rec) {
+    rec.classification = CLS.classify(rec.answers || {});   // always recompute with current rules
+    if (!rec.labelled) rec.labelled = {};
+    return rec;
+  }
+  function ingest(text, name) {
+    var added = 0;
+    text = text.replace(/^\uFEFF/, '');
+    try {
+      if (/\.csv$/i.test(name) || (!/^\s*[\[{]/.test(text) && text.indexOf(',') !== -1)) {
+        parseCSV(text).forEach(function (o) { records.push(toRecord(o)); added++; });
+      } else if (/^\s*\[/.test(text)) {
+        JSON.parse(text).forEach(function (o) { records.push(toRecord(o)); added++; });
+      } else if (/^\s*\{/.test(text) && text.trim().split('\n').length > 1 && /\}\s*\n\s*\{/.test(text)) {
+        text.trim().split('\n').forEach(function (l) { if (l.trim()) { records.push(toRecord(JSON.parse(l))); added++; } });
+      } else { records.push(toRecord(JSON.parse(text))); added++; }
+    } catch (e) { alert('Could not read ' + name + ': ' + e.message); }
+    dedupe(); fillAreas(); draw();
+    return added;
+  }
+  function dedupe() {
+    var seen = {}; records = records.filter(function (r) { var k = r.meta.reference_id || JSON.stringify(r.answers); if (seen[k]) return false; seen[k] = 1; return true; });
+  }
+
+  /* ---------- view ---------- */
+  function val(r, k) {
+    var c = r.classification, a = r.answers || {};
+    switch (k) {
+      case 'date': return r.meta.submitted_at || '';
+      case 'company': return a.company_name || '';
+      case 'area': return c.primary_domain_label || '';
+      case 'scope': return c.scope; case 'fit': return c.fit_score; case 'maturity': return c.maturity; case 'readiness': return c.readiness;
+      case 'action': return c.action; case 'country': return a.hq_country || ''; case 'contact': return (a.contact_name || '') + (a.contact_email ? ' <' + a.contact_email + '>' : '');
+    }
+    return '';
+  }
+  function filtered() {
+    var q = document.getElementById('q').value.trim().toLowerCase();
+    var fs = document.getElementById('f-scope').value, fa = document.getElementById('f-action').value, fd = document.getElementById('f-area').value;
+    return records.filter(function (r) {
+      var c = r.classification, a = r.answers || {};
+      if (fs && c.scope !== fs) return false;
+      if (fa && c.action_code !== fa) return false;
+      if (fd && c.primary_domain !== fd) return false;
+      if (q) { var hay = [a.company_name, a.product_name, a.tagline, a.contact_name, a.contact_email, a.website].join(' ').toLowerCase(); if (hay.indexOf(q) === -1) return false; }
+      return true;
+    }).sort(function (x, y) {
+      var vx = val(x, sortKey), vy = val(y, sortKey);
+      if (typeof vx === 'number') return (vx - vy) * sortDir;
+      return String(vx).localeCompare(String(vy)) * sortDir;
+    });
+  }
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function scoreClass(n) { return n >= (window.SCOUTING_CONFIG.thresholds.fastTrack) ? 'score--hi' : (n >= window.SCOUTING_CONFIG.thresholds.review ? 'score--mid' : 'score--lo'); }
+  function draw() {
+    var list = filtered(), tb = document.getElementById('rows');
+    document.getElementById('count').textContent = records.length ? list.length + ' of ' + records.length + ' submissions' : 'No submissions loaded';
+    document.getElementById('export').disabled = !list.length;
+    if (!list.length) { tb.innerHTML = '<tr><td colspan="10" class="empty">' + (records.length ? 'No submissions match these filters.' : 'Load an export to start.') + '</td></tr>'; return; }
+    tb.innerHTML = list.map(function (r) {
+      var c = r.classification, a = r.answers || {};
+      return '<tr data-id="' + esc(r.meta.reference_id) + '" class="' + (selected && selected.meta.reference_id === r.meta.reference_id ? 'is-selected' : '') + '">' +
+        '<td>' + esc((r.meta.submitted_at || '').slice(0, 10)) + '</td>' +
+        '<td class="company">' + esc(a.company_name || '(no name)') + '<small>' + esc(a.product_name || '') + (a.website ? ' · ' + esc(a.website.replace(/^https?:\/\//, '')) : '') + '</small></td>' +
+        '<td>' + esc(c.primary_domain_label) + (c.strategic ? ' <span class="star" title="Strategic area">★</span>' : '') + '</td>' +
+        '<td><span class="tag tag--' + esc(c.scope) + '">' + esc(c.scope) + '</span></td>' +
+        '<td><span class="score ' + scoreClass(c.fit_score) + '">' + c.fit_score + '</span></td>' +
+        '<td>' + esc(c.maturity) + '</td><td>' + esc(c.readiness) + '</td><td style="white-space:normal;min-width:180px">' + esc(c.action) + '</td>' +
+        '<td>' + esc(a.hq_country || '') + '</td><td style="white-space:normal;min-width:160px">' + esc(a.contact_name || '') + '<br><small class="dim">' + esc(a.contact_email || '') + '</small></td></tr>';
+    }).join('');
+    document.querySelectorAll('th').forEach(function (th) { th.classList.toggle('sorted', th.dataset.sort === sortKey); });
+  }
+  function fillAreas() {
+    var sel = document.getElementById('f-area'), cur = sel.value, seen = {};
+    sel.innerHTML = '<option value="">All areas</option>';
+    records.forEach(function (r) { var c = r.classification; if (c.primary_domain && !seen[c.primary_domain]) { seen[c.primary_domain] = 1; sel.innerHTML += '<option value="' + esc(c.primary_domain) + '">' + esc(c.primary_domain_label) + '</option>'; } });
+    sel.value = cur;
+  }
+  function showDetail(r) {
+    selected = r;
+    var c = r.classification, a = r.answers || {}, box = document.getElementById('detail');
+    var html = '<button class="btn-link close" type="button" id="close">Close</button><h2>' + esc(a.company_name || '(no name)') + '</h2>' +
+      '<p class="muted" style="margin:6px 0 0">' + esc(a.tagline || '') + '</p>' +
+      '<dl class="kv"><dt>Reference</dt><dd>' + esc(r.meta.reference_id || '') + '</dd><dt>Fit score</dt><dd><span class="score ' + scoreClass(c.fit_score) + '">' + c.fit_score + '</span></dd>' +
+      '<dt>Scope</dt><dd>' + esc(c.scope) + (c.strategic ? ' (strategic area)' : '') + '</dd><dt>Suggested action</dt><dd>' + esc(c.action) + '</dd>' +
+      '<dt>Maturity</dt><dd>' + esc(c.maturity) + '</dd><dt>Readiness</dt><dd>' + esc(c.readiness) + '</dd></dl>' +
+      '<h3>Why</h3><ul class="reasons">' + (c.reasons.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') || '<li>n/a</li>') + '</ul>' +
+      '<h3>Flags</h3><ul class="reasons">' + (c.flags.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') || '<li>none</li>') + '</ul>';
+    SCHEMA.steps.forEach(function (s) {
+      var rows = s.questions.filter(function (q) { return r.labelled[q.id] !== undefined && r.labelled[q.id] !== '' || (a[q.id] !== undefined && a[q.id] !== ''); });
+      if (!rows.length) return;
+      html += '<h3>' + esc(s.title) + '</h3><dl class="kv">';
+      rows.forEach(function (q) {
+        var v = r.labelled[q.id] !== undefined ? r.labelled[q.id] : (Array.isArray(a[q.id]) ? a[q.id].join('; ') : String(a[q.id]));
+        var label = q.type === 'consent' ? q.label.replace(/<[^>]+>/g, '').slice(0, 60) + '...' : q.label;
+        html += '<dt>' + esc(label) + '</dt><dd>' + (q.type === 'url' && /^https?:/.test(v) ? '<a href="' + esc(v) + '" target="_blank" rel="noopener" style="color:var(--accent)">' + esc(v) + '</a>' : esc(v)) + '</dd>';
+      });
+      html += '</dl>';
+    });
+    box.innerHTML = html; box.hidden = false; document.getElementById('layout').classList.add('has-detail'); draw();
+    document.getElementById('close').onclick = function () { selected = null; box.hidden = true; document.getElementById('layout').classList.remove('has-detail'); draw(); };
+  }
+  function exportCSV() {
+    var list = filtered();
+    var cols = ['reference_id', 'submitted_at', 'company_name', 'product_name', 'website', 'hq_country', 'primary_area', 'scope', 'strategic', 'fit_score', 'maturity', 'readiness', 'action', 'reasons', 'flags', 'contact_name', 'contact_email', 'contact_role', 'tagline'];
+    var lines = [cols.join(',')];
+    list.forEach(function (r) {
+      var c = r.classification, a = r.answers || {};
+      var row = [r.meta.reference_id, r.meta.submitted_at, a.company_name, a.product_name, a.website, a.hq_country, c.primary_domain_label, c.scope, c.strategic ? 'yes' : 'no', c.fit_score, c.maturity, c.readiness, c.action, c.reasons.join('; '), c.flags.join('; '), a.contact_name, a.contact_email, a.contact_role, a.tagline];
+      lines.push(row.map(function (v) { v = v == null ? '' : String(v); return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; }).join(','));
+    });
+    var blob = new Blob(['\uFEFF' + lines.join('\n')], { type: 'text/csv;charset=utf-8' });
+    var aEl = document.createElement('a'); aEl.href = URL.createObjectURL(blob); aEl.download = 'scouting-triage-' + new Date().toISOString().slice(0, 10) + '.csv'; document.body.appendChild(aEl); aEl.click(); aEl.remove();
+  }
+
+  /* ---------- wiring ---------- */
+  var drop = document.getElementById('drop'), file = document.getElementById('file');
+  function readFiles(files) { Array.prototype.forEach.call(files, function (f) { var fr = new FileReader(); fr.onload = function () { ingest(fr.result, f.name); }; fr.readAsText(f); }); }
+  file.addEventListener('change', function () { readFiles(file.files); file.value = ''; });
+  ['dragenter', 'dragover'].forEach(function (ev) { drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.add('is-over'); }); });
+  ['dragleave', 'drop'].forEach(function (ev) { drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.remove('is-over'); }); });
+  drop.addEventListener('drop', function (e) { readFiles(e.dataTransfer.files); });
+  ['q', 'f-scope', 'f-action', 'f-area'].forEach(function (id) { document.getElementById(id).addEventListener('input', draw); });
+  document.querySelectorAll('th[data-sort]').forEach(function (th) { th.addEventListener('click', function () { if (sortKey === th.dataset.sort) sortDir = -sortDir; else { sortKey = th.dataset.sort; sortDir = th.dataset.sort === 'fit' ? -1 : 1; } draw(); }); });
+  document.getElementById('rows').addEventListener('click', function (e) { var tr = e.target.closest('tr[data-id]'); if (!tr) return; var r = records.filter(function (x) { return x.meta.reference_id === tr.dataset.id; })[0]; if (r) showDetail(r); });
+  document.getElementById('export').addEventListener('click', exportCSV);
+  document.getElementById('load-sample').addEventListener('click', function () {
+    fetch('sample-submissions.json').then(function (r) { return r.text(); }).then(function (t) { ingest(t, 'sample-submissions.json'); })
+      .catch(function () { alert('Could not load the sample file. If you opened this page from disk, serve the folder with a local web server (see README).'); });
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /form/
+Disallow: /tools/
+Sitemap: https://YOUR-ORG.github.io/ecosystem-scouting/sitemap.xml

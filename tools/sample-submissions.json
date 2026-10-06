@@ -1,0 +1,652 @@
+[
+  {
+    "answers": {
+      "offer_type": "opensource",
+      "domains": [
+        "semantic_kg",
+        "genai"
+      ],
+      "primary_domain": "semantic_kg",
+      "company_name": "Ontolink",
+      "website": "https://ontolink.example",
+      "hq_country": "Italy",
+      "founded_year": "2022",
+      "company_size": "11-50",
+      "funding_stage": "seed",
+      "spinout": "yes",
+      "spinout_institution": "Politecnico di Milano",
+      "regions": [
+        "italy",
+        "europe"
+      ],
+      "europe_presence": "italy",
+      "product_name": "Ontolink Graph",
+      "tagline": "Virtual knowledge graphs over enterprise data for GraphRAG",
+      "problem": "Enterprises cannot ground LLMs on data spread across dozens of systems. Ontolink builds a virtual graph over sources without moving data.",
+      "differentiator": "Zero-copy virtualization plus SHACL validation and a native MCP server.",
+      "competitors": "Stardog, GraphDB, data.world",
+      "deployment": [
+        "byoc",
+        "onprem",
+        "saas"
+      ],
+      "marketplaces": [
+        "aws"
+      ],
+      "licensing": [
+        "subscription",
+        "open_core"
+      ],
+      "oss_core": "partly",
+      "oss_license": "apache2",
+      "apis": [
+        "rest",
+        "sdk_python",
+        "sql",
+        "cli"
+      ],
+      "kg_standards": [
+        "rdf_owl_sparql",
+        "shacl",
+        "r2rml_virtualization"
+      ],
+      "kg_approach": "both",
+      "kg_scale": "100m_1b",
+      "kg_llm": [
+        "graphrag",
+        "nl_query",
+        "mcp"
+      ],
+      "customers": "6-20",
+      "enterprise_share": "some",
+      "references": "Under NDA",
+      "industries": [
+        "pharma_lifesciences",
+        "manufacturing"
+      ],
+      "acv": "100_500k",
+      "time_to_value": "weeks",
+      "certifications": [
+        "soc2",
+        "in_progress"
+      ],
+      "enterprise_features": [
+        "sso",
+        "rbac",
+        "audit",
+        "eu_residency"
+      ],
+      "trial": "sandbox",
+      "poc_willing": "yes_free",
+      "partners": "yes_si",
+      "partner_names": "Two European SIs",
+      "partner_program": [
+        "reseller",
+        "cosell"
+      ],
+      "looking_for": [
+        "co_delivery",
+        "reference_architecture"
+      ],
+      "contact_name": "Giulia Ferri",
+      "contact_role": "CEO",
+      "contact_email": "giulia@ontolink.example",
+      "heard_from": "event",
+      "consent": true
+    },
+    "labelled": {
+      "offer_type": "An open source project with a commercial offering",
+      "domains": "Semantic layer, knowledge graphs & ontologies; Generative AI, LLM infrastructure & agents",
+      "primary_domain": "Semantic layer, knowledge graphs & ontologies",
+      "company_name": "Ontolink",
+      "website": "https://ontolink.example",
+      "hq_country": "Italy",
+      "founded_year": "2022",
+      "company_size": "11 to 50",
+      "funding_stage": "Seed",
+      "spinout": "Yes",
+      "spinout_institution": "Politecnico di Milano",
+      "regions": "Italy; Rest of Europe",
+      "europe_presence": "Yes, including Italy",
+      "product_name": "Ontolink Graph",
+      "tagline": "Virtual knowledge graphs over enterprise data for GraphRAG",
+      "problem": "Enterprises cannot ground LLMs on data spread across dozens of systems. Ontolink builds a virtual graph over sources without moving data.",
+      "differentiator": "Zero-copy virtualization plus SHACL validation and a native MCP server.",
+      "competitors": "Stardog, GraphDB, data.world",
+      "deployment": "In the customer's cloud account (BYOC); On-premises; SaaS, multi-tenant",
+      "marketplaces": "AWS Marketplace",
+      "licensing": "Subscription; Open core",
+      "oss_core": "Partly",
+      "oss_license": "Apache 2.0",
+      "apis": "REST API; Python SDK; SQL interface; CLI",
+      "kg_standards": "RDF / OWL / SPARQL; SHACL; R2RML / virtual graphs over relational sources",
+      "kg_approach": "Both",
+      "kg_scale": "100 million to 1 billion",
+      "kg_llm": "GraphRAG / grounding for LLMs; Natural language to SPARQL / SQL / Cypher; MCP server or agent tools",
+      "customers": "6 to 20",
+      "enterprise_share": "Some",
+      "references": "Under NDA",
+      "industries": "Pharma & life sciences; Manufacturing & industrial",
+      "acv": "100k to 500k",
+      "time_to_value": "A few weeks",
+      "certifications": "SOC 2; In progress",
+      "enterprise_features": "SSO (SAML / OIDC); Role-based access control; Audit logs; EU data residency",
+      "trial": "Self-service trial or sandbox",
+      "poc_willing": "Yes, at no cost",
+      "partners": "Yes, with system integrators",
+      "partner_names": "Two European SIs",
+      "partner_program": "Reseller agreement; Co-sell motion",
+      "looking_for": "Co-delivery on client programs; Inclusion in reference architectures",
+      "contact_name": "Giulia Ferri",
+      "contact_role": "CEO",
+      "contact_email": "giulia@ontolink.example",
+      "heard_from": "An event or conference",
+      "consent": "Yes"
+    },
+    "classification": {
+      "scope": "core",
+      "primary_domain": "semantic_kg",
+      "primary_domain_label": "Semantic layer, knowledge graphs & ontologies",
+      "strategic": true,
+      "fit_score": 100,
+      "maturity": "Emerging",
+      "readiness": "High",
+      "action": "Fast-track: schedule an intro call",
+      "action_code": "fast_track",
+      "reasons": [
+        "Core area: Semantic layer, knowledge graphs & ontologies",
+        "Strategic area for the practice",
+        "Deploys in customer environments",
+        "Rich API / SDK surface",
+        "SOC 2 / ISO 27001 in place",
+        "EU data residency",
+        "Open to a proof of concept",
+        "Already works with system integrators",
+        "Team in Italy"
+      ],
+      "flags": [],
+      "rules_version": "1.0"
+    },
+    "meta": {
+      "reference_id": "ES-20261001-A1B2",
+      "submitted_at": "2026-10-01T09:12:00Z",
+      "form_version": "1.0.0",
+      "provider": "sample",
+      "duration_seconds": 300,
+      "page": "sample",
+      "language": "en"
+    }
+  },
+  {
+    "answers": {
+      "offer_type": "product",
+      "domains": [
+        "ai_governance"
+      ],
+      "primary_domain": "ai_governance",
+      "company_name": "Guardrail Labs",
+      "website": "https://guardrail.example",
+      "hq_country": "Germany",
+      "founded_year": "2023",
+      "company_size": "1-10",
+      "funding_stage": "pre_seed",
+      "spinout": "no",
+      "regions": [
+        "europe"
+      ],
+      "europe_presence": "europe",
+      "product_name": "Guardrail Control",
+      "tagline": "Inventory, monitoring and action control for enterprise AI agents",
+      "problem": "Regulated companies deploy agents without visibility or control.",
+      "differentiator": "A gateway that enforces policies at runtime, mapped to the EU AI Act.",
+      "deployment": [
+        "saas",
+        "single_tenant"
+      ],
+      "marketplaces": [
+        "none"
+      ],
+      "licensing": [
+        "subscription"
+      ],
+      "oss_core": "no",
+      "apis": [
+        "rest",
+        "sdk_python"
+      ],
+      "aig_capabilities": [
+        "inventory",
+        "monitoring",
+        "gateway",
+        "eu_ai_act"
+      ],
+      "aig_scope": "genai",
+      "customers": "1-5",
+      "enterprise_share": "some",
+      "industries": [
+        "financial_services"
+      ],
+      "time_to_value": "weeks",
+      "certifications": [
+        "in_progress"
+      ],
+      "enterprise_features": [
+        "sso",
+        "rbac"
+      ],
+      "trial": "guided",
+      "poc_willing": "yes_paid",
+      "partners": "none",
+      "partner_program": [
+        "none"
+      ],
+      "looking_for": [
+        "co_delivery",
+        "joint_gtm"
+      ],
+      "contact_name": "Jonas Weber",
+      "contact_role": "Co-founder",
+      "contact_email": "jonas@guardrail.example",
+      "heard_from": "linkedin",
+      "consent": true
+    },
+    "labelled": {
+      "offer_type": "A software product",
+      "domains": "AI governance, evaluation & monitoring",
+      "primary_domain": "AI governance, evaluation & monitoring",
+      "company_name": "Guardrail Labs",
+      "website": "https://guardrail.example",
+      "hq_country": "Germany",
+      "founded_year": "2023",
+      "company_size": "1 to 10",
+      "funding_stage": "Pre-seed",
+      "spinout": "No",
+      "regions": "Rest of Europe",
+      "europe_presence": "Yes, elsewhere in Europe",
+      "product_name": "Guardrail Control",
+      "tagline": "Inventory, monitoring and action control for enterprise AI agents",
+      "problem": "Regulated companies deploy agents without visibility or control.",
+      "differentiator": "A gateway that enforces policies at runtime, mapped to the EU AI Act.",
+      "deployment": "SaaS, multi-tenant; Dedicated cloud instance",
+      "marketplaces": "Not yet",
+      "licensing": "Subscription",
+      "oss_core": "No",
+      "apis": "REST API; Python SDK",
+      "aig_capabilities": "AI system inventory; Runtime monitoring; Control gateway / action control; EU AI Act mapping",
+      "aig_scope": "Generative AI and agents only",
+      "customers": "1 to 5",
+      "enterprise_share": "Some",
+      "industries": "Banking, insurance & financial services",
+      "time_to_value": "A few weeks",
+      "certifications": "In progress",
+      "enterprise_features": "SSO (SAML / OIDC); Role-based access control",
+      "trial": "Guided proof of concept with your team",
+      "poc_willing": "Yes, as a paid engagement",
+      "partners": "Not yet",
+      "partner_program": "None yet",
+      "looking_for": "Co-delivery on client programs; Joint go-to-market",
+      "contact_name": "Jonas Weber",
+      "contact_role": "Co-founder",
+      "contact_email": "jonas@guardrail.example",
+      "heard_from": "LinkedIn",
+      "consent": "Yes"
+    },
+    "classification": {
+      "scope": "core",
+      "primary_domain": "ai_governance",
+      "primary_domain_label": "AI governance, evaluation & monitoring",
+      "strategic": true,
+      "fit_score": 68,
+      "maturity": "Early",
+      "readiness": "Medium",
+      "action": "Fast-track: schedule an intro call",
+      "action_code": "fast_track",
+      "reasons": [
+        "Core area: AI governance, evaluation & monitoring",
+        "Strategic area for the practice",
+        "Open to a proof of concept",
+        "Team in Europe"
+      ],
+      "flags": [],
+      "rules_version": "1.0"
+    },
+    "meta": {
+      "reference_id": "ES-20261002-C3D4",
+      "submitted_at": "2026-10-02T14:40:00Z",
+      "form_version": "1.0.0",
+      "provider": "sample",
+      "duration_seconds": 300,
+      "page": "sample",
+      "language": "en"
+    }
+  },
+  {
+    "answers": {
+      "offer_type": "product",
+      "domains": [
+        "vertical_ai"
+      ],
+      "primary_domain": "vertical_ai",
+      "company_name": "GeoSignal",
+      "website": "https://geosignal.example",
+      "hq_country": "United Kingdom",
+      "founded_year": "2020",
+      "company_size": "11-50",
+      "funding_stage": "series_a",
+      "spinout": "no",
+      "regions": [
+        "europe",
+        "north_america"
+      ],
+      "europe_presence": "europe",
+      "product_name": "GeoSignal Intelligence",
+      "tagline": "Geopolitical risk intelligence from open sources",
+      "problem": "Supply chain and security teams lack early warning on geopolitical events.",
+      "differentiator": "Proprietary OSINT pipeline with analyst-grade summaries.",
+      "deployment": [
+        "saas"
+      ],
+      "marketplaces": [
+        "none"
+      ],
+      "licensing": [
+        "subscription"
+      ],
+      "oss_core": "no",
+      "apis": [
+        "rest"
+      ],
+      "vert_industry": [
+        "logistics",
+        "energy_utilities",
+        "public_sector"
+      ],
+      "vert_stack": "Managed ingestion of news and social sources, entity resolution, LLM summarisation. Not reusable as a platform.",
+      "customers": "21-100",
+      "enterprise_share": "some",
+      "industries": [
+        "logistics",
+        "energy_utilities"
+      ],
+      "time_to_value": "days",
+      "certifications": [
+        "iso27001"
+      ],
+      "enterprise_features": [
+        "sso",
+        "audit"
+      ],
+      "trial": "sandbox",
+      "poc_willing": "not_now",
+      "partners": "cloud_only",
+      "partner_names": "Microsoft",
+      "partner_program": [
+        "referral"
+      ],
+      "looking_for": [
+        "referral",
+        "joint_gtm"
+      ],
+      "contact_name": "Amara Osei",
+      "contact_role": "Head of Partnerships",
+      "contact_email": "amara@geosignal.example",
+      "heard_from": "partner",
+      "consent": true
+    },
+    "labelled": {
+      "offer_type": "A software product",
+      "domains": "Industry-specific AI application",
+      "primary_domain": "Industry-specific AI application",
+      "company_name": "GeoSignal",
+      "website": "https://geosignal.example",
+      "hq_country": "United Kingdom",
+      "founded_year": "2020",
+      "company_size": "11 to 50",
+      "funding_stage": "Series A",
+      "spinout": "No",
+      "regions": "Rest of Europe; North America",
+      "europe_presence": "Yes, elsewhere in Europe",
+      "product_name": "GeoSignal Intelligence",
+      "tagline": "Geopolitical risk intelligence from open sources",
+      "problem": "Supply chain and security teams lack early warning on geopolitical events.",
+      "differentiator": "Proprietary OSINT pipeline with analyst-grade summaries.",
+      "deployment": "SaaS, multi-tenant",
+      "marketplaces": "Not yet",
+      "licensing": "Subscription",
+      "oss_core": "No",
+      "apis": "REST API",
+      "vert_industry": "Transport & logistics; Energy & utilities; Public sector & healthcare providers",
+      "vert_stack": "Managed ingestion of news and social sources, entity resolution, LLM summarisation. Not reusable as a platform.",
+      "customers": "21 to 100",
+      "enterprise_share": "Some",
+      "industries": "Transport & logistics; Energy & utilities",
+      "time_to_value": "Days",
+      "certifications": "ISO 27001",
+      "enterprise_features": "SSO (SAML / OIDC); Audit logs",
+      "trial": "Self-service trial or sandbox",
+      "poc_willing": "Not at this stage",
+      "partners": "Only with cloud or platform vendors",
+      "partner_names": "Microsoft",
+      "partner_program": "Referral fees",
+      "looking_for": "Referral; Joint go-to-market",
+      "contact_name": "Amara Osei",
+      "contact_role": "Head of Partnerships",
+      "contact_email": "amara@geosignal.example",
+      "heard_from": "A partner or investor",
+      "consent": "Yes"
+    },
+    "classification": {
+      "scope": "adjacent",
+      "primary_domain": "vertical_ai",
+      "primary_domain_label": "Industry-specific AI application",
+      "strategic": false,
+      "fit_score": 52,
+      "maturity": "Growth",
+      "readiness": "High",
+      "action": "Review in the next scouting sync",
+      "action_code": "review",
+      "reasons": [
+        "Adjacent area: Industry-specific AI application",
+        "SOC 2 / ISO 27001 in place",
+        "Proven with paying customers",
+        "Team in Europe"
+      ],
+      "flags": [
+        "not open to POC",
+        "SaaS only"
+      ],
+      "rules_version": "1.0"
+    },
+    "meta": {
+      "reference_id": "ES-20261003-E5F6",
+      "submitted_at": "2026-10-03T08:05:00Z",
+      "form_version": "1.0.0",
+      "provider": "sample",
+      "duration_seconds": 300,
+      "page": "sample",
+      "language": "en"
+    }
+  },
+  {
+    "answers": {
+      "offer_type": "product",
+      "domains": [
+        "integration",
+        "data_platforms"
+      ],
+      "primary_domain": "integration",
+      "company_name": "Streamline Data",
+      "website": "https://streamline.example",
+      "hq_country": "United States",
+      "founded_year": "2019",
+      "company_size": "51-200",
+      "funding_stage": "series_b",
+      "spinout": "no",
+      "regions": [
+        "north_america",
+        "europe"
+      ],
+      "europe_presence": "none",
+      "product_name": "Streamline",
+      "tagline": "CDC and streaming pipelines into the lakehouse",
+      "problem": "Moving operational data to analytics in near real time.",
+      "differentiator": "300+ connectors, exactly-once delivery, Iceberg-native.",
+      "competitors": "Fivetran, Airbyte, Debezium",
+      "deployment": [
+        "saas",
+        "byoc",
+        "hybrid"
+      ],
+      "marketplaces": [
+        "aws",
+        "azure",
+        "snowflake"
+      ],
+      "licensing": [
+        "consumption"
+      ],
+      "oss_core": "no",
+      "apis": [
+        "rest",
+        "terraform",
+        "cli"
+      ],
+      "int_capabilities": [
+        "cdc",
+        "streaming",
+        "batch_elt",
+        "transformation"
+      ],
+      "int_connectors": "200_plus",
+      "int_streaming": [
+        "kafka",
+        "kinesis"
+      ],
+      "customers": "100+",
+      "enterprise_share": "most",
+      "references": "Public case studies on our site",
+      "industries": [
+        "retail_cpg",
+        "financial_services",
+        "cross_industry"
+      ],
+      "acv": "100_500k",
+      "time_to_value": "days",
+      "certifications": [
+        "soc2",
+        "iso27001",
+        "hipaa",
+        "gdpr_dpa"
+      ],
+      "enterprise_features": [
+        "sso",
+        "rbac",
+        "audit",
+        "private_networking",
+        "sla",
+        "support_247"
+      ],
+      "trial": "sandbox",
+      "poc_willing": "yes_free",
+      "partners": "yes_si",
+      "partner_names": "Several global SIs",
+      "partner_program": [
+        "reseller",
+        "referral",
+        "cosell",
+        "enablement"
+      ],
+      "looking_for": [
+        "co_delivery",
+        "resale",
+        "enablement"
+      ],
+      "contact_name": "Dana Patel",
+      "contact_role": "Director, Alliances EMEA",
+      "contact_email": "dana@streamline.example",
+      "heard_from": "accenture_contact",
+      "consent": true,
+      "updates_optin": true
+    },
+    "labelled": {
+      "offer_type": "A software product",
+      "domains": "Data integration, pipelines & streaming; Data platforms & storage",
+      "primary_domain": "Data integration, pipelines & streaming",
+      "company_name": "Streamline Data",
+      "website": "https://streamline.example",
+      "hq_country": "United States",
+      "founded_year": "2019",
+      "company_size": "51 to 200",
+      "funding_stage": "Series B",
+      "spinout": "No",
+      "regions": "North America; Rest of Europe",
+      "europe_presence": "Not yet",
+      "product_name": "Streamline",
+      "tagline": "CDC and streaming pipelines into the lakehouse",
+      "problem": "Moving operational data to analytics in near real time.",
+      "differentiator": "300+ connectors, exactly-once delivery, Iceberg-native.",
+      "competitors": "Fivetran, Airbyte, Debezium",
+      "deployment": "SaaS, multi-tenant; In the customer's cloud account (BYOC); Hybrid",
+      "marketplaces": "AWS Marketplace; Azure Marketplace; Snowflake Marketplace",
+      "licensing": "Consumption-based",
+      "oss_core": "No",
+      "apis": "REST API; Terraform / IaC; CLI",
+      "int_capabilities": "Change data capture; Event streaming; Batch ELT; Transformations (SQL, dbt)",
+      "int_connectors": "More than 200",
+      "int_streaming": "Kafka / Confluent; Kinesis",
+      "customers": "More than 100",
+      "enterprise_share": "Most",
+      "references": "Public case studies on our site",
+      "industries": "Retail & consumer goods; Banking, insurance & financial services; Cross-industry",
+      "acv": "100k to 500k",
+      "time_to_value": "Days",
+      "certifications": "SOC 2; ISO 27001; HIPAA; GDPR-ready DPA",
+      "enterprise_features": "SSO (SAML / OIDC); Role-based access control; Audit logs; Private networking (VPC / Private Link); Contractual SLA; 24/7 support",
+      "trial": "Self-service trial or sandbox",
+      "poc_willing": "Yes, at no cost",
+      "partners": "Yes, with system integrators",
+      "partner_names": "Several global SIs",
+      "partner_program": "Reseller agreement; Referral fees; Co-sell motion; Partner training & certification",
+      "looking_for": "Co-delivery on client programs; Resale; Practice enablement and training",
+      "contact_name": "Dana Patel",
+      "contact_role": "Director, Alliances EMEA",
+      "contact_email": "dana@streamline.example",
+      "heard_from": "An Accenture contact",
+      "consent": "Yes",
+      "updates_optin": "Yes"
+    },
+    "classification": {
+      "scope": "core",
+      "primary_domain": "integration",
+      "primary_domain_label": "Data integration, pipelines & streaming",
+      "strategic": false,
+      "fit_score": 92,
+      "maturity": "Established",
+      "readiness": "High",
+      "action": "Fast-track: schedule an intro call",
+      "action_code": "fast_track",
+      "reasons": [
+        "Core area: Data integration, pipelines & streaming",
+        "Deploys in customer environments",
+        "Rich API / SDK surface",
+        "SOC 2 / ISO 27001 in place",
+        "Proven with paying customers",
+        "Open to a proof of concept",
+        "Already works with system integrators"
+      ],
+      "flags": [
+        "no European presence"
+      ],
+      "rules_version": "1.0"
+    },
+    "meta": {
+      "reference_id": "ES-20261004-G7H8",
+      "submitted_at": "2026-10-04T17:22:00Z",
+      "form_version": "1.0.0",
+      "provider": "sample",
+      "duration_seconds": 300,
+      "page": "sample",
+      "language": "en"
+    }
+  }
+]
